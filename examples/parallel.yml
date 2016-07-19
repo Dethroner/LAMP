@@ -1,0 +1,7 @@
+---
+- hosts: web
+  gather_facts: no
+
+  tasks:
+  - name: sleep for 5 seconds
+    shell: /bin/sleep 5

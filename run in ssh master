@@ -1,0 +1,7 @@
+# save ssh key nodes
+ssh-keyscan syn web1 web2 >> .ssh/known_hosts
+
+# generate ssh key for master node
+ssh-keygen -t rsa -b 2048
+
+ansible-playbook /vagrant/examples/ssh-addkey.yml

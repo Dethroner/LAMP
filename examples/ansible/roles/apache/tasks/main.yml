@@ -1,0 +1,6 @@
+---
+# Install apache, update_cache is like running `apt-get update` 
+# and tell our 'start apache' handler to start apache
+- name: Install Apache2
+  apt: name=apache2 state=latest update_cache=yes
+  notify: start apache

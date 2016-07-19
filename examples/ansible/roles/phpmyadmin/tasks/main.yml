@@ -1,0 +1,4 @@
+---
+# Install phpMyAdmin
+- name: Install phpMyAdmin
+  apt: name=phpmyadmin

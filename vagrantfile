@@ -1,0 +1,45 @@
+# Defines our Vagrant environment
+#
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define :syn do |syn|
+      syn.vm.box = "debian64.box"
+      syn.vm.hostname = "syn"
+      syn.vm.network :private_network, ip: "192.168.10.11"
+      syn.vm.network "forwarded_port", guest: 80, host: 8080
+      syn.vm.provider "virtualbox" do |v|
+       v.name = "syn"
+       v.memory = "128"
+      end
+      syn.vm.provision :shell, path: "python.sh"
+  end
+
+  (1..2).each do |i|
+    config.vm.define "web#{i}" do |node|
+      node.vm.box = "debian64.box"
+      node.vm.hostname = "web#{i}"
+      node.vm.network :private_network, ip: "192.168.10.2#{i}"
+      node.vm.network "forwarded_port", guest: 80, host: "808#{i}"
+      node.vm.provider "virtualbox" do |v|
+       v.name = "web#{i}"
+       v.memory = "128"
+      end
+	  node.vm.provision :shell, path: "python.sh"
+    end
+  end
+  
+  config.vm.define :master do |master|
+      master.vm.box = "debian64.box"
+      master.vm.hostname = "master"
+      master.vm.network :private_network, ip: "192.168.10.10"
+      master.vm.provider "virtualbox" do |v|
+       v.name = "master"
+       v.memory = "256"
+      end
+      master.vm.provision :shell, path: "bootstrap.sh"
+  end  
+
+end

@@ -1,0 +1,10 @@
+---
+# Install MySQL
+# python-mysqldb is required by ansible for use of the MySQL modules
+- name: Install MySQL
+  apt: name={{ item }} state=latest
+  with_items:
+    - php5-mysql
+    - mysql-server
+    - python-mysqldb
+  notify: start mysql

@@ -1,0 +1,8 @@
+- hosts: web
+  sudo: yes
+  sudo_user: root
+  tasks:
+   - name: updates a server
+     apt: update_cache=yes
+   - name: upgrade a server
+     action: apt upgrade=dist

@@ -1,0 +1,6 @@
+
+# vagrant environment nodes
+192.168.10.10  master
+192.168.10.11  syn
+192.168.10.21  web1
+192.168.10.22  web2
